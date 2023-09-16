@@ -9,6 +9,19 @@ export const PinTab = ({length, maxchar}) => {
           inputref.current[index+1].focus();
         }
     }
+    const handelBack = (e, index)=>{
+      if(e.target.value.length=== 0 && index>0){
+        inputref.current[index-1].focus();
+      }
+    }
+    const keyHandel = (e, index)=>{
+        if(e.keyCode===8){
+          handelBack(e, index);
+        }
+        else{
+           handelFocus(e, index);
+        }
+    }
     return (
     <>
     {
@@ -18,7 +31,7 @@ export const PinTab = ({length, maxchar}) => {
           inputref.current[index]=e;
         }} 
         maxLength={maxchar}
-        onChange={(e)=>{handelFocus(e,index)}}
+        onKeyUp={(e)=>keyHandel(e, index)}
         ></input>
     })
 }
